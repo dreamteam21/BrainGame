@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "975801285854",
+    "firebase_url": "https://braingame-4790d.firebaseio.com",
+    "project_id": "braingame-4790d",
+    "storage_bucket": "braingame-4790d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975801285854:android:e9db33399f7dd8742dd64f",
+        "android_client_info": {
+          "package_name": "com.example.braingame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975801285854-6dhr3fam8o7hgep10419u0nghluaad95.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.braingame",
+            "certificate_hash": "694349fc0a877f2952e9a1d8f8236dcba7bc1dbf"
+          }
+        },
+        {
+          "client_id": "975801285854-rn18dl8i9p61rdv4vighc63qvh8476uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXpAdecO8_z4BHrVeEuEvdYSPf0mjY7FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975801285854-rn18dl8i9p61rdv4vighc63qvh8476uk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975801285854:android:2456742d1ad457852dd64f",
+        "android_client_info": {
+          "package_name": "com.example.braingame2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975801285854-6j2lsqdmrtq9g4b626gjcrcvefnfedb1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.braingame2",
+            "certificate_hash": "694349fc0a877f2952e9a1d8f8236dcba7bc1dbf"
+          }
+        },
+        {
+          "client_id": "975801285854-rn18dl8i9p61rdv4vighc63qvh8476uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXpAdecO8_z4BHrVeEuEvdYSPf0mjY7FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975801285854-rn18dl8i9p61rdv4vighc63qvh8476uk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975801285854:android:6ffc80616ec2b1242dd64f",
+        "android_client_info": {
+          "package_name": "com.example.braingame3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975801285854-gdvs23jgvojkt63tnic6lrc7so95fjbk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.braingame3",
+            "certificate_hash": "694349fc0a877f2952e9a1d8f8236dcba7bc1dbf"
+          }
+        },
+        {
+          "client_id": "975801285854-rn18dl8i9p61rdv4vighc63qvh8476uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXpAdecO8_z4BHrVeEuEvdYSPf0mjY7FM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975801285854-rn18dl8i9p61rdv4vighc63qvh8476uk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

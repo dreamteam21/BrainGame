@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">เกมบริหารสมอง</string>
+    <string name="main_login">เข้าสู่ระบบด้วยอีเมล</string>
+    <string name="main_signup">ลงทะเบียนด้วยอีเมล</string>
+    <string name="login">เข้าสู่ระบบ</string>
+    <string name="login_email">อีเมลผู้ใช้งาน</string>
+    <string name="login_password">รหัสผ่าน</string>
+    <string name="register_email">โปรดระบุอีเมลของคุณ</string>
+    <string name="register_password">โปรดระบุรหัสผ่านของคุณ</string>
+    <string name="register_confirm_password">โปรดระบุรหัสผ่านของคุณอีกครั้ง</string>
+    <string name="register_button">ลงทะเบียน</string>
+    <string name="home_signout_button">ออกจากระบบ</string>
+    <string name="home_email">อีเมลผู้ใช้งาน</string>
+    <string name="home_uid">UID ผู้ใช้งาน</string>
+</resources>
