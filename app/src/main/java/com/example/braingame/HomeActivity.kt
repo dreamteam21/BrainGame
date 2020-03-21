@@ -4,6 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
 import org.jetbrains.anko.toast
@@ -20,10 +24,9 @@ class HomeActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        val user = mAuth!!.currentUser
-
-        homeEmail.text = user!!.email
-        homeUID.text = user.uid
+//        val user = mAuth!!.currentUser
+//        homeEmail.text = user!!.email
+//        homeUID.text = user.uid
 
         mAuthListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
             val users = firebaseAuth.currentUser
@@ -33,13 +36,19 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        homeSignoutBtn.setOnClickListener {
-            mAuth!!.signOut()
-            toast("Logout!")
-            Log.d(TAG, "Logout")
-            startActivity(Intent(this@HomeActivity, MainActivity::class.java))
-            finish()
-        }
+        //setSupportActionBar(homeToolbar)
+
+        val navigationController = Navigation.findNavController(this, R.id.homeFragment)
+        NavigationUI.setupWithNavController(navigationView, navigationController)
+        NavigationUI.setupActionBarWithNavController(this, navigationController, homeDrawerLayout)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.homeFragment), homeDrawerLayout)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.option_menu, menu)
+        return true
     }
 
     override fun onStart() {
@@ -54,11 +63,15 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    //all user to press back to go back to previous task
-//    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-//        if(keyCode == KeyEvent.KEYCODE_BACK){
-//            moveTaskToBack(true)
-//        }
-//        return super.onKeyDown(keyCode, event)
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.navigationLogout) {
+            mAuth!!.signOut()
+            toast("Logout!")
+            Log.d(TAG, "Logout")
+            startActivity(Intent(this@HomeActivity, MainActivity::class.java))
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

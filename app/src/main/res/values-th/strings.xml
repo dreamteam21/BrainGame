@@ -12,4 +12,8 @@
     <string name="home_signout_button">ออกจากระบบ</string>
     <string name="home_email">อีเมลผู้ใช้งาน</string>
     <string name="home_uid">UID ผู้ใช้งาน</string>
+    <string name="home_home">หน้าหลัก</string>
+    <string name="home_leaderboard">การจัดอันดับ</string>
+    <string name="home_howto">วิธีการเล่น</string>
+    <string name="home_logout">ออกจากระบบ</string>
 </resources>

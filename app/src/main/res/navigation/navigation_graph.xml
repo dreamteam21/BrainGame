@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/navigationHome">
+
+    <fragment
+        android:id="@+id/navigationHome"
+        android:name="com.example.braingame.HomeFragment"
+        android:label="@string/home_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigationHowto"
+        android:name="com.example.braingame.HowtoFragment"
+        android:label="@string/home_howto"
+        tools:layout="@layout/fragment_howto" />
+    <fragment
+        android:id="@+id/navigationLeaderboard"
+        android:name="com.example.braingame.LeaderboardFragment"
+        android:label="@string/home_leaderboard"
+        tools:layout="@layout/fragment_leaderboard" />
+</navigation>
