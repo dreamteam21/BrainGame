@@ -16,6 +16,8 @@
     <string name="home_leaderboard">Leaderboard</string>
     <string name="home_howto">How to play</string>
     <string name="home_logout">Logout</string>
+    <string name="home_welcome">Welcome!</string>
+    <string name="home_profile">Profile</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

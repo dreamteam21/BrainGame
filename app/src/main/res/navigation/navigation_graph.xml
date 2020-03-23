@@ -11,6 +11,11 @@
         android:label="@string/home_home"
         tools:layout="@layout/fragment_home" />
     <fragment
+        android:id="@+id/navigationProfile"
+        android:name="com.example.braingame.ProfileFragment"
+        android:label="@string/home_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
         android:id="@+id/navigationHowto"
         android:name="com.example.braingame.HowtoFragment"
         android:label="@string/home_howto"
@@ -20,4 +25,5 @@
         android:name="com.example.braingame.LeaderboardFragment"
         android:label="@string/home_leaderboard"
         tools:layout="@layout/fragment_leaderboard" />
+
 </navigation>

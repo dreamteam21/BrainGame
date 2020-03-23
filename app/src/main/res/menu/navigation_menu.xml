@@ -6,6 +6,11 @@
         android:icon="@drawable/home"
         />
     <item
+        android:id="@+id/navigationProfile"
+        android:title="@string/home_profile"
+        android:icon="@drawable/profile"
+        />
+    <item
         android:id="@+id/navigationLeaderboard"
         android:title="@string/home_leaderboard"
         android:icon="@drawable/leaderboard"
@@ -13,6 +18,7 @@
     <item
         android:id="@+id/navigationHowto"
         android:title="@string/home_howto"
-        android:icon="@drawable/howto"/>
+        android:icon="@drawable/howto"
+        />
 
 </menu>

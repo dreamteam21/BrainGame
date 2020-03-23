@@ -1,15 +1,21 @@
 package com.example.braingame
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.navigation_header.*
 import org.jetbrains.anko.toast
 
 class HomeActivity : AppCompatActivity() {
@@ -24,10 +30,6 @@ class HomeActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
 
-//        val user = mAuth!!.currentUser
-//        homeEmail.text = user!!.email
-//        homeUID.text = user.uid
-
         mAuthListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
             val users = firebaseAuth.currentUser
             if(users == null){
@@ -41,6 +43,14 @@ class HomeActivity : AppCompatActivity() {
         val navigationController = Navigation.findNavController(this, R.id.homeFragment)
         NavigationUI.setupWithNavController(navigationView, navigationController)
         NavigationUI.setupActionBarWithNavController(this, navigationController, homeDrawerLayout)
+
+        val user = mAuth!!.currentUser
+//        homeEmail.text = user!!.email
+//        homeUID.text = user.uid
+        val navigationView = findViewById<NavigationView>(R.id.navigationView)
+        val headerView = navigationView.getHeaderView(0)
+        val homeHeaderUserEmail = headerView.findViewById<TextView>(R.id.homeHeaderUserEmail)
+        homeHeaderUserEmail.setText(user!!.email)
     }
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.homeFragment), homeDrawerLayout)
