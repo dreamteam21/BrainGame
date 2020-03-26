@@ -19,4 +19,6 @@
     <string name="hello_blank_fragment">Fragment ว่างเปล่า</string>
     <string name="home_welcome">ยินดีต้อนรับ!</string>
     <string name="home_profile">บัญชีผู้ใช้</string>
+    <string name="profile_username">ชื่อผู้ใช้</string>
+    <string name="profile_button">บันทึกการเปลี่ยนแปลง</string>
 </resources>

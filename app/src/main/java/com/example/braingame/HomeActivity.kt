@@ -38,8 +38,6 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        //setSupportActionBar(homeToolbar)
-
         val navigationController = Navigation.findNavController(this, R.id.homeFragment)
         NavigationUI.setupWithNavController(navigationView, navigationController)
         NavigationUI.setupActionBarWithNavController(this, navigationController, homeDrawerLayout)

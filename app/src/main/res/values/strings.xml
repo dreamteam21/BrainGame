@@ -18,6 +18,8 @@
     <string name="home_logout">Logout</string>
     <string name="home_welcome">Welcome!</string>
     <string name="home_profile">Profile</string>
+    <string name="profile_username">Username</string>
+    <string name="profile_button">SAVE CHANGES</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
