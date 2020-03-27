@@ -13,8 +13,6 @@ class MainActivity : AppCompatActivity() {
 
     var mAuth: FirebaseAuth? = null
     private val TAG: String = "Main Activity"
-    var myLocale: Locale? = null
-    private lateinit var thisImage: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +32,5 @@ class MainActivity : AppCompatActivity() {
         mainRegister.setOnClickListener {
             startActivity(Intent(this@MainActivity, RegisterActivity::class.java))
         }
-//        imageDisplay.setOnClickListener{
-//            toast("Click on image")
-//            thisImage = findViewById(R.id.imageDisplay) as ImageView
-//            thisImage.visibility = ImageView.INVISIBLE
-//        }
     }
 }

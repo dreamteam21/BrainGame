@@ -1,21 +1,18 @@
 package com.example.braingame
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.navigation.NavigationView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.navigation_header.*
 import org.jetbrains.anko.toast
 
 class HomeActivity : AppCompatActivity() {
@@ -39,16 +36,21 @@ class HomeActivity : AppCompatActivity() {
         }
 
         val navigationController = Navigation.findNavController(this, R.id.homeFragment)
-        NavigationUI.setupWithNavController(navigationView, navigationController)
+        NavigationUI.setupWithNavController(view_navigation, navigationController)
         NavigationUI.setupActionBarWithNavController(this, navigationController, homeDrawerLayout)
 
         val user = mAuth!!.currentUser
-//        homeEmail.text = user!!.email
-//        homeUID.text = user.uid
-        val navigationView = findViewById<NavigationView>(R.id.navigationView)
-        val headerView = navigationView.getHeaderView(0)
+        val headerView = view_navigation.getHeaderView(0)
         val homeHeaderUserEmail = headerView.findViewById<TextView>(R.id.homeHeaderUserEmail)
-        homeHeaderUserEmail.setText(user!!.email)
+        val homeDisplay = headerView.findViewById<ImageView>(R.id.homeProfileDisplay)
+        if(user?.photoUrl != null) {
+            Glide.with(this).load(user?.photoUrl).into(homeDisplay)
+        }
+        if(!user?.displayName.isNullOrEmpty()){
+            homeHeaderUserEmail.text = user?.displayName
+        }else{
+            homeHeaderUserEmail.text = user?.email
+        }
     }
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.homeFragment), homeDrawerLayout)
@@ -74,7 +76,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.navigationLogout) {
             mAuth!!.signOut()
-            toast("Logout!")
+            toast(R.string.home_logout_message)
             Log.d(TAG, "Logout")
             startActivity(Intent(this@HomeActivity, MainActivity::class.java))
             finish()

@@ -20,6 +20,20 @@
     <string name="home_profile">Profile</string>
     <string name="profile_username">Username</string>
     <string name="profile_button">SAVE CHANGES</string>
+    <string name="profile_username_error">Please enter your username</string>
+    <string name="register_enter_email">Please Enter Email Address</string>
+    <string name="register_enter_password">Please Enter Password</string>
+    <string name="register_re_enter_password">Please Re-Enter Password</string>
+    <string name="register_password_not_match">Passwords are not match</string>
+    <string name="register_auth_fail">Authentication Failed, please try again</string>
+    <string name="register_successful">Account has been created successfully!</string>
+    <string name="login_enter_email">Please Enter Email Address</string>
+    <string name="login_enter_password">Please Enter Password</string>
+    <string name="login_auth_fail">Authentication failed</string>
+    <string name="login_successful">Login Successfully!</string>
+    <string name="home_logout_message">Logout Successfully!</string>
+    <string name="profile_crop_not_support">Sorry, your device does not support cropping</string>
+    <string name="profile_pic_upload_success">Profile display was uploaded successfully!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

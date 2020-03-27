@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ProgressBar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.toast
@@ -25,27 +26,32 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginBtn.setOnClickListener {
+            loginProgressBar.visibility = ProgressBar.VISIBLE
             val email = loginEmail.text.toString().trim { it <= ' ' }
             val password = loginPassword.text.toString().trim { it <= ' ' }
 
             if(email.isEmpty()){
-                toast("Please Enter Email Address")
+                toast(R.string.login_enter_email)
                 Log.d(TAG, "Email was empty")
+                loginProgressBar.visibility = ProgressBar.INVISIBLE
                 return@setOnClickListener
             }
             if(password.isEmpty()){
-                toast("Please Enter Password")
+                toast(R.string.login_enter_password)
                 Log.d(TAG, "Password was empty")
+                loginProgressBar.visibility = ProgressBar.INVISIBLE
                 return@setOnClickListener
             }
 
             mAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if(!task.isSuccessful){
-                    toast("Authentication Failed: "+task.exception)
+                    loginProgressBar.visibility = ProgressBar.INVISIBLE
+                    toast(R.string.login_auth_fail)
                     Log.d(TAG, "Authentication Failed: "+task.exception)
                 }
                 else{
-                    toast("Login successfully!")
+                    loginProgressBar.visibility = ProgressBar.INVISIBLE
+                    toast(R.string.login_successful)
                     Log.d(TAG, "Login successfully!")
                     startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
                     finish()

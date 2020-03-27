@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="205dp"
     android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
     android:padding="20dp">
 
 
@@ -24,25 +25,24 @@
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="130dp"
-        android:textColor="@android:color/white"
         android:maxLines="2"
-        android:singleLine="false"/>
+        android:singleLine="false"
+        android:textColor="@android:color/white" />
 
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginStart="20dp"
         app:cardCornerRadius="50dp"
-        app:strokeWidth="0dp"
-        android:layout_marginStart="20dp">
+        app:strokeWidth="0dp">
+
         <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
             android:id="@+id/homeProfileDisplay"
-            android:scaleType="fitCenter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/blank_profile" />
     </com.google.android.material.card.MaterialCardView>
-
 
 
 </RelativeLayout>

@@ -21,4 +21,18 @@
     <string name="home_profile">บัญชีผู้ใช้</string>
     <string name="profile_username">ชื่อผู้ใช้</string>
     <string name="profile_button">บันทึกการเปลี่ยนแปลง</string>
+    <string name="profile_username_error">โปรดระบุชื่อผู้ใช้งาน</string>
+    <string name="register_enter_email">โปรดระบุอีเมล์</string>
+    <string name="register_enter_password">โปรดระบุรหัสผ่าน</string>
+    <string name="register_re_enter_password">โปรดระบุรหัสผ่านอีกครั้ง</string>
+    <string name="register_password_not_match">รหัสผ่านไม่ตรงกัน</string>
+    <string name="register_auth_fail">การรับรองผิดพลาด โปรดลองใหม่อีกครั้ง</string>
+    <string name="register_successful">บัญชีผู้ใช้ใหม่ถูกสร้างสำเร็จแล้ว!</string>
+    <string name="login_enter_email">โปรดระบุอีเมล์</string>
+    <string name="login_enter_password">โปรดระบุรหัสผ่าน</string>
+    <string name="login_auth_fail">การรับรองผิดพลาด โปรดลองใหม่อีกครั้ง</string>
+    <string name="login_successful">เข้าสู่ระบบสำเร็จ!</string>
+    <string name="home_logout_message">ออกจากระบบสำเร็จ!</string>
+    <string name="profile_crop_not_support">ขออภัย อุปกรณ์ของคุณไม่รองรับการตัดภาพ</string>
+    <string name="profile_pic_upload_success">รูปผู้ใช้งานถูกอัปโหลดเรียบร้อย!</string>
 </resources>

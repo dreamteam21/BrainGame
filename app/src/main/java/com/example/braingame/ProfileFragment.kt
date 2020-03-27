@@ -1,33 +1,49 @@
 package com.example.braingame
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.ActivityNotFoundException
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_profile.*
-import java.io.ByteArrayOutputStream
 import org.jetbrains.anko.toast
+import java.io.ByteArrayOutputStream
 
 class ProfileFragment : Fragment() {
 
-    val CAMERA_CAPTURE = 1000
+    companion object {
+        private const val CAMERA_CAPTURE = 1000
+        private const val PERMISSION_CODE = 2000
+        private const val PIC_CROP = 3000
+        private const val DEFAULT_DISPLAY_IMAGE = "https://i.ibb.co/37P7VFB/blank-profile.jpg"
+    }
     var mAuth: FirebaseAuth? = null
     private lateinit var imageUri: Uri
+    var imageUriBeforeCrop: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
@@ -35,17 +51,89 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mAuth = FirebaseAuth.getInstance()
-
-        val userEmail = mAuth!!.currentUser!!.email
-        profileFragmentEmail.setText(userEmail)
+        mAuth!!.currentUser?.let { user ->
+            if(user.photoUrl != null){
+                Glide.with(this)
+                    .load(user.photoUrl)
+                    .into(profileFragmentDisplay)
+            }
+            if(user.displayName != null) {
+                profileFragmentUsername.setText(user.displayName)
+            }
+            profileFragmentEmail.setText(user.email)
+        }
 
         profileFragmentDisplay.setOnClickListener {
-            openCamera()
+            profileFragmentDisplayProgressBar.visibility = ProgressBar.VISIBLE
+            if(checkSelfPermission(activity!!, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED || checkSelfPermission(
+                    activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                val permission = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                requestPermissions(permission, PERMISSION_CODE)
+            }
+            else {
+                openCamera()
+            }
+        }
+
+        profileFragmentButton.setOnClickListener {
+            profileFragmentProgressBar.visibility = ProgressBar.VISIBLE
+            val photo = when { // switch
+                ::imageUri.isInitialized -> imageUri
+                mAuth!!.currentUser?.photoUrl == null -> Uri.parse(DEFAULT_DISPLAY_IMAGE)
+                else -> mAuth!!.currentUser?.photoUrl
+            }
+            val name = profileFragmentUsername.text.toString().trim()
+            if (name.isEmpty()) {
+                profileFragmentProgressBar.visibility = ProgressBar.INVISIBLE
+                profileFragmentUsername.error = getString(R.string.profile_username_error)
+                profileFragmentUsername.requestFocus()
+                return@setOnClickListener
+            }
+            val updateProfile =
+                UserProfileChangeRequest.Builder().setDisplayName(name).setPhotoUri(photo).build()
+            mAuth!!.currentUser?.updateProfile(updateProfile)?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    profileFragmentProgressBar.visibility = ProgressBar.INVISIBLE
+                    activity!!.recreate()
+                    context?.toast(R.string.profile_pic_upload_success)
+                } else {
+                    profileFragmentProgressBar.visibility = ProgressBar.INVISIBLE
+                    context?.toast(task.exception?.message!!)
+                }
+            }
+        }
+
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+
+        when (requestCode) {
+            PERMISSION_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openCamera()
+                } else {
+                    Toast.makeText(activity!!, "Permission denied", Toast.LENGTH_SHORT).show()
+                    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+                }
+            }
         }
     }
 
-    private fun openCamera(){
+    private fun openCamera() {
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.TITLE, "New Picture")
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
+        imageUriBeforeCrop = requireActivity().contentResolver.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            values
+        )
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { pictureIntent ->
+            pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUriBeforeCrop)
             pictureIntent.resolveActivity(activity?.packageManager!!)?.also {
                 startActivityForResult(pictureIntent, CAMERA_CAPTURE)
             }
@@ -55,59 +143,71 @@ class ProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == CAMERA_CAPTURE && resultCode == RESULT_OK){
-//            performCrop()
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            uploadImageAndSaveUri(imageBitmap)
-        }
-//        else if(requestCode == PIC_CROP){
+        if (requestCode == CAMERA_CAPTURE && resultCode == RESULT_OK) {
+            performCrop()
 //            val imageBitmap = data?.extras?.get("data") as Bitmap
 //            uploadImageAndSaveUri(imageBitmap)
-//        }
+        } else if (requestCode == PIC_CROP) {
+            val uri: Uri? = data?.data
+            if (uri != null) {
+                try {
+                    val imageBitmap: Bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                requireContext().contentResolver,
+                                uri
+                            )
+                        )
+                    } else {
+                        MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
+                    }
+                    uploadImageAndSaveUri(imageBitmap)
+                } catch (e: Exception) {
+                    Log.e("ProfileFragment", "", e)
+                }
+            }
+        }
     }
 
-//    private fun performCrop(){
-//        try { //call the standard crop action intent (the user device may not support it)
-//            val cropIntent = Intent("com.android.camera.action.CROP")
-//            //indicate image type and Uri
-//            cropIntent.setDataAndType(imageUri, "image/*")
-//            //set crop properties
-//            cropIntent.putExtra("crop", "true")
-//            //indicate aspect of desired crop
-//            cropIntent.putExtra("aspectX", 1)
-//            cropIntent.putExtra("aspectY", 1)
-//            //indicate output X and Y
-//            cropIntent.putExtra("outputX", 256)
-//            cropIntent.putExtra("outputY", 256)
-//            //retrieve data on return
-//            cropIntent.putExtra("return-data", true)
-//            //start the activity - we handle returning in onActivityResult
-//            startActivityForResult(cropIntent, PIC_CROP)
-//        } catch (anfe: ActivityNotFoundException) { //display an error message
-//            activity?.toast("Whoops - your device doesn't support the crop action!")
-//        }
-//    }
+    private fun performCrop() {
+        try { //call the standard crop action intent (the user device may not support it)
+            val cropIntent = Intent("com.android.camera.action.CROP")
+            cropIntent.setDataAndType(imageUriBeforeCrop, "image/*")
+            cropIntent.putExtra("crop", "true")
+            cropIntent.putExtra("aspectX", 1)
+            cropIntent.putExtra("aspectY", 1)
+            cropIntent.putExtra("outputX", 720)
+            cropIntent.putExtra("outputY", 720)
+            cropIntent.putExtra("return-data", true)
+            startActivityForResult(cropIntent, PIC_CROP)
+        } catch (anfe: ActivityNotFoundException) {
+            activity?.toast(R.string.profile_crop_not_support)
+        }
+    }
 
-    private fun uploadImageAndSaveUri(bitmap: Bitmap){
+    private fun uploadImageAndSaveUri(bitmap: Bitmap) {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        val storageReference = FirebaseStorage.getInstance().reference.child("profileDisplay/${mAuth!!.currentUser?.uid}")
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 0, byteArrayOutputStream)
+        val storageReference = FirebaseStorage.getInstance()
+            .reference.child("profileDisplay/${mAuth!!.currentUser?.uid}")
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream)
         val image = byteArrayOutputStream.toByteArray()
         val upload = storageReference.putBytes(image)
         upload.addOnCompleteListener { uploadTask ->
-            if(uploadTask.isSuccessful){
+            if (uploadTask.isSuccessful) {
                 storageReference.downloadUrl.addOnCompleteListener { urlTask ->
-                    urlTask.result?.let{
+                    urlTask.result?.let {
                         imageUri = it
                         profileFragmentDisplay.setImageBitmap(bitmap)
+                        profileFragmentDisplayProgressBar.visibility = ProgressBar.INVISIBLE
                     }
                 }
-            }
-            else{
+            } else {
                 uploadTask.exception?.let {
                     activity?.toast(it.message!!)
+                    profileFragmentDisplayProgressBar.visibility = ProgressBar.INVISIBLE
                 }
             }
         }
+
     }
 }

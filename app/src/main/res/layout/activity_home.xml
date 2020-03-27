@@ -23,7 +23,7 @@
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
+        android:id="@+id/view_navigation"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/navigation_menu"
         android:layout_gravity="start"
