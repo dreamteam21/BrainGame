@@ -34,5 +34,5 @@
     <string name="login_successful">เข้าสู่ระบบสำเร็จ!</string>
     <string name="home_logout_message">ออกจากระบบสำเร็จ!</string>
     <string name="profile_crop_not_support">ขออภัย อุปกรณ์ของคุณไม่รองรับการตัดภาพ</string>
-    <string name="profile_pic_upload_success">รูปผู้ใช้งานถูกอัปโหลดเรียบร้อย!</string>
+    <string name="profile_pic_upload_success">ข้อมูลผู้ใช้งานถูกอัปเดตเรียบร้อย!</string>
 </resources>
