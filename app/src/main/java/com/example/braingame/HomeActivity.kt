@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
@@ -13,18 +14,22 @@ import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.navigation_header.*
 import org.jetbrains.anko.toast
+import java.util.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), Observer {
 
     var mAuth: FirebaseAuth? = null
     var mAuthListener: FirebaseAuth.AuthStateListener? = null
     private val TAG: String = "Home Activity"
+    private var mScoreListAdapter: ScoreCardAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
+        ScoreModel.addObserver(this)
         mAuth = FirebaseAuth.getInstance()
 
         mAuthListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
@@ -39,18 +44,24 @@ class HomeActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(view_navigation, navigationController)
         NavigationUI.setupActionBarWithNavController(this, navigationController, homeDrawerLayout)
 
+
+
         val user = mAuth!!.currentUser
         val headerView = view_navigation.getHeaderView(0)
-        val homeHeaderUserEmail = headerView.findViewById<TextView>(R.id.homeHeaderUserEmail)
+        val progressBar = headerView.findViewById<ProgressBar>(R.id.homeHeaderProgressBar)
+        progressBar.visibility = ProgressBar.VISIBLE
+        val homeHeaderUserName = headerView.findViewById<TextView>(R.id.homeHeaderUserName)
         val homeDisplay = headerView.findViewById<ImageView>(R.id.homeProfileDisplay)
         if(user?.photoUrl != null) {
             Glide.with(this).load(user?.photoUrl).into(homeDisplay)
         }
-        if(!user?.displayName.isNullOrEmpty()){
-            homeHeaderUserEmail.text = user?.displayName
-        }else{
-            homeHeaderUserEmail.text = user?.email
+        if(user?.displayName != null){
+            homeHeaderUserName.text = user?.displayName
         }
+        else{
+            homeHeaderUserName.text = user?.email
+        }
+        progressBar.visibility = ProgressBar.INVISIBLE
     }
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.homeFragment), homeDrawerLayout)
@@ -71,6 +82,25 @@ class HomeActivity : AppCompatActivity() {
         if(mAuthListener != null){
             mAuth!!.removeAuthStateListener { mAuthListener }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun update(o: Observable?, arg: Any?) {
+        mScoreListAdapter?.clear()
+
+        val data = ScoreModel.getData()
+        if(data != null){
+            setData(data)
+        }
+    }
+
+    private fun setData(data: List<Score>) {
+        mScoreListAdapter?.clear()
+        mScoreListAdapter?.addAll(data.sortedByDescending { score -> score.score })
+        mScoreListAdapter?.notifyDataSetChanged()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

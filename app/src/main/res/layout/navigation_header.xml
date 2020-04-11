@@ -7,7 +7,6 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +19,7 @@
         android:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/homeHeaderUserEmail"
+        android:id="@+id/homeHeaderUserName"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
@@ -42,6 +41,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/blank_profile" />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/homeHeaderProgressBar"
+            android:visibility="invisible"
+            />
     </com.google.android.material.card.MaterialCardView>
 
 

@@ -6,17 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-    <ImageView
-        android:id="@+id/regisProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:visibility="visible"
+    <EditText
+        android:id="@+id/regisName"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="25dp"
+        android:ems="10"
+        android:hint="@string/register_name"
+        android:inputType="text"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/regisEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/blank_profile" />
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/regisEmail"

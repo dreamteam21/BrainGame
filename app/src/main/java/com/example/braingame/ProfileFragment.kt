@@ -21,8 +21,10 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.jetbrains.anko.toast
@@ -39,6 +41,8 @@ class ProfileFragment : Fragment() {
     var mAuth: FirebaseAuth? = null
     private lateinit var imageUri: Uri
     var imageUriBeforeCrop: Uri? = null
+    private val TAG : String = "Profile Fragment"
+    val score = Score(null)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +66,19 @@ class ProfileFragment : Fragment() {
             }
             profileFragmentEmail.setText(user.email)
         }
+
+        var tempUserList : ArrayList<Score>? = ScoreModel.getData()
+        if(tempUserList != null){
+            for(user in tempUserList){
+                if(user.uid == mAuth!!.currentUser?.uid){
+
+                    score.uid = user.uid
+                    score.score = user.score
+                    break
+                }
+            }
+        }
+
 
         profileFragmentDisplay.setOnClickListener {
             profileFragmentDisplayProgressBar.visibility = ProgressBar.VISIBLE
@@ -93,6 +110,12 @@ class ProfileFragment : Fragment() {
                 UserProfileChangeRequest.Builder().setDisplayName(name).setPhotoUri(photo).build()
             mAuth!!.currentUser?.updateProfile(updateProfile)?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    score.name = name
+                    ScoreModel.saveScore(score, OnCompleteListener { task ->
+                        if(task.isComplete){
+                            Log.d(TAG, "update user entry in db successfully.")
+                        }
+                    })
                     profileFragmentProgressBar.visibility = ProgressBar.INVISIBLE
                     activity!!.recreate()
                     context?.toast(R.string.profile_pic_upload_success)

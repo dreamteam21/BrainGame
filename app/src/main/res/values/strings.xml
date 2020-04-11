@@ -8,6 +8,7 @@
     <string name="register_password">Enter your password</string>
     <string name="register_confirm_password">Re-enter your password</string>
     <string name="register_button">REGISTER</string>
+    <string name="register_name">Enter your name</string>
     <string name="register_email">Enter your e-mail</string>
     <string name="home_signout_button">LOGOUT</string>
     <string name="home_email">User e-mail</string>
@@ -21,6 +22,7 @@
     <string name="profile_username">Username</string>
     <string name="profile_button">SAVE CHANGES</string>
     <string name="profile_username_error">Please enter your username</string>
+    <string name="register_enter_name">Please Enter Name</string>
     <string name="register_enter_email">Please Enter Email Address</string>
     <string name="register_enter_password">Please Enter Password</string>
     <string name="register_re_enter_password">Please Re-Enter Password</string>
@@ -34,6 +36,10 @@
     <string name="home_logout_message">Logout Successfully!</string>
     <string name="profile_crop_not_support">Sorry, your device does not support cropping</string>
     <string name="profile_pic_upload_success">Profile was updated successfully!</string>
+    <string name="home_level">Select Level</string>
+    <string name="home_easy">Easy</string>
+    <string name="home_normal">Normal</string>
+    <string name="home_hard">Hard</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

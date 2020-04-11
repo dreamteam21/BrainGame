@@ -9,6 +9,32 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="@string/home_level"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:textSize="30dp"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-70dp"
+        android:text="@string/home_easy"
+        android:id="@+id/homeEasy"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="@string/home_normal"
+        android:id="@+id/homeNormal"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:text="@string/home_hard"
+        android:id="@+id/homeHard"/>
 
 </FrameLayout>
