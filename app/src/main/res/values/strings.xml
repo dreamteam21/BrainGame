@@ -40,6 +40,21 @@
     <string name="home_easy">Easy</string>
     <string name="home_normal">Normal</string>
     <string name="home_hard">Hard</string>
+    <string name="leaderboard_name">Name</string>
+    <string name="leaderboard_score">Score</string>
+    <string name="game_header_question">How many blocks are there?</string>
+    <string name="game_starting">Game is starting in...</string>
+    <string name="game_block_text">Block(s)</string>
+    <string name="game_time_left">Time left</string>
+    <string name="game_correct">Correct!</string>
+    <string name="game_wrong">Wrong!</string>
+    <string name="game_dialog_score_message">The correct answer is</string>
+    <string name="game_dialog_result">Your score is</string>
+    <string name="game_finish">Finish</string>
+    <string name="game_over">Game Over</string>
+    <string name="game_continue">NEXT QUESTION</string>
+    <string name="game_retry">TRY AGAIN</string>
+    <string name="game_terminate">BACK TO HOME</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

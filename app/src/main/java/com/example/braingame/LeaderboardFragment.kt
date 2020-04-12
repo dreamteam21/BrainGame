@@ -27,7 +27,6 @@ class LeaderboardFragment : Fragment(), Observer {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //ScoreModel
         ScoreModel.addObserver(this)
         val dataList: ListView = view?.findViewById(R.id.leaderboard_score_list)
         val data: ArrayList<Score> = ArrayList()
@@ -46,7 +45,7 @@ class LeaderboardFragment : Fragment(), Observer {
 
     private fun setData(data: List<Score>) {
         mScoreListAdapter?.clear()
-        mScoreListAdapter?.addAll(data.sortedByDescending { score -> score.score })
+        mScoreListAdapter?.addAll(data.sortedByDescending { score -> score.score.toInt() })
         mScoreListAdapter?.notifyDataSetChanged()
     }
 
