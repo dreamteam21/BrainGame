@@ -1,5 +1,6 @@
 package com.example.braingame
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -105,11 +106,18 @@ class HomeActivity : AppCompatActivity(), Observer {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.navigationLogout) {
-            mAuth!!.signOut()
-            toast(R.string.home_logout_message)
-            Log.d(TAG, "Logout")
-            startActivity(Intent(this@HomeActivity, MainActivity::class.java))
-            finish()
+            val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
+            alertDialog.setTitle(resources.getString(R.string.home_dialog_logout_title))
+            alertDialog.setMessage(resources.getString(R.string.home_dialog_logout_message))
+            alertDialog.setPositiveButton(resources.getString(R.string.home_dialog_logout_yes)){_, _ ->
+                mAuth!!.signOut()
+                toast(R.string.home_logout_message)
+                Log.d(TAG, "Logout")
+                startActivity(Intent(this@HomeActivity, MainActivity::class.java))
+                finish()
+            }
+            alertDialog.setNegativeButton(resources.getString(R.string.home_dialog_logout_no)){_, _ -> }
+            alertDialog.show()
             return true
         }
         return super.onOptionsItemSelected(item)

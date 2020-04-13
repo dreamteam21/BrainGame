@@ -35,7 +35,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        android:layout_marginTop="0dp">
+
+        <ProgressBar
+            android:id="@+id/gameEasyProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="-6dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:orientation="horizontal"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:gravity="center_horizontal">
 
             <LinearLayout

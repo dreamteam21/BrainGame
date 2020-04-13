@@ -1,5 +1,7 @@
 package com.example.braingame
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -24,7 +26,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         homeEasy.setOnClickListener {
-            startActivity(Intent(activity, EasyModeActivity::class.java))
+            val alertDialog: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+            alertDialog.setTitle(resources.getString(R.string.home_dialog_title))
+            alertDialog.setMessage(resources.getString(R.string.home_dialog_message))
+            alertDialog.setPositiveButton(resources.getString(R.string.home_dialog_yes)){_, _ ->
+                startActivity(Intent(activity, EasyModeActivity::class.java))
+            }
+            alertDialog.setNegativeButton(resources.getString(R.string.home_dialog_no)){_, _ -> }
+            alertDialog.show()
         }
     }
 

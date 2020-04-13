@@ -41,6 +41,14 @@
     <string name="home_easy">ง่าย</string>
     <string name="home_normal">ปานกลาง</string>
     <string name="home_hard">ยาก</string>
+    <string name="home_dialog_title">เริ่มเกม</string>
+    <string name="home_dialog_message">เกมไม่สามารถยกเลิกได้จนกว่าจะจบ</string>
+    <string name="home_dialog_yes">เริ่ม</string>
+    <string name="home_dialog_no">ยกเลิก</string>
+    <string name="home_dialog_logout_title">ออกจากระบบ</string>
+    <string name="home_dialog_logout_message">ยืนยันที่จะออกจากระบบ</string>
+    <string name="home_dialog_logout_yes">ใช่</string>
+    <string name="home_dialog_logout_no">ไม่</string>
     <string name="leaderboard_name">ชื่อ</string>
     <string name="leaderboard_score">คะแนน</string>
     <string name="game_header_question">มีบล็อกอยู่เท่าไหร่</string>
@@ -49,8 +57,10 @@
     <string name="game_time_left">เวลาเหลือ</string>
     <string name="game_correct">ถูกต้อง</string>
     <string name="game_wrong">ผิด</string>
+    <string name="game_dialog_correct_message">คุณได้รับ</string>
+    <string name="game_dialog_correct_message_unit">คะแนน</string>
     <string name="game_dialog_score_message">คำตอบที่ถูกต้องคือ</string>
-    <string name="game_dialog_result">คะแนนของคุณคือ</string>
+    <string name="game_dialog_result">คะแนนรวมของคุณคือ</string>
     <string name="game_finish">จบ</string>
     <string name="game_over">จบเกม</string>
     <string name="game_continue">ข้อต่อไป</string>
