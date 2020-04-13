@@ -45,11 +45,20 @@ class HomeActivity : AppCompatActivity(), Observer {
         NavigationUI.setupWithNavController(view_navigation, navigationController)
         NavigationUI.setupActionBarWithNavController(this, navigationController, homeDrawerLayout)
 
-
-
         val user = mAuth!!.currentUser
         val headerView = view_navigation.getHeaderView(0)
         val progressBar = headerView.findViewById<ProgressBar>(R.id.homeHeaderProgressBar)
+        val tempArr : ArrayList<Score>? = ScoreModel.getData()
+        val homeScore = headerView.findViewById<TextView>(R.id.homeScore)
+        if(tempArr != null){
+            for(user in tempArr){
+                if(user.uid == mAuth!!.currentUser?.uid){
+                    homeScore.text = user.score
+                    Log.d(TAG, "RETRIEVED USER CURRENT SCORE COMPLETED")
+                    break
+                }
+            }
+        }
         progressBar.visibility = ProgressBar.VISIBLE
         val homeHeaderUserName = headerView.findViewById<TextView>(R.id.homeHeaderUserName)
         val homeDisplay = headerView.findViewById<ImageView>(R.id.homeProfileDisplay)
@@ -76,6 +85,8 @@ class HomeActivity : AppCompatActivity(), Observer {
     override fun onStart() {
         super.onStart()
         mAuth!!.addAuthStateListener { mAuthListener }
+        ScoreModel.addObserver(this)
+        ScoreModel.getData()?.let { setData(it) }
     }
 
     override fun onStop() {
@@ -83,10 +94,6 @@ class HomeActivity : AppCompatActivity(), Observer {
         if(mAuthListener != null){
             mAuth!!.removeAuthStateListener { mAuthListener }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun update(o: Observable?, arg: Any?) {

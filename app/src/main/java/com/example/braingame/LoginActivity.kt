@@ -58,5 +58,8 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+        loginBackBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
 }

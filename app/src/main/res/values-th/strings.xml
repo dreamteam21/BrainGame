@@ -3,6 +3,7 @@
     <string name="main_login">เข้าสู่ระบบด้วยอีเมล</string>
     <string name="main_signup">ลงทะเบียนด้วยอีเมล</string>
     <string name="login">เข้าสู่ระบบ</string>
+    <string name="login_back">กลับ</string>
     <string name="login_email">อีเมลผู้ใช้งาน</string>
     <string name="login_password">รหัสผ่าน</string>
     <string name="register_name">โปรดระบุชื่อของคุณ</string>
@@ -10,6 +11,7 @@
     <string name="register_password">โปรดระบุรหัสผ่านของคุณ</string>
     <string name="register_confirm_password">โปรดระบุรหัสผ่านของคุณอีกครั้ง</string>
     <string name="register_button">ลงทะเบียน</string>
+    <string name="register_back_button">กลับ</string>
     <string name="home_signout_button">ออกจากระบบ</string>
     <string name="home_email">อีเมลผู้ใช้งาน</string>
     <string name="home_uid">UID ผู้ใช้งาน</string>
@@ -20,6 +22,7 @@
     <string name="hello_blank_fragment">Fragment ว่างเปล่า</string>
     <string name="home_welcome">ยินดีต้อนรับ!</string>
     <string name="home_profile">บัญชีผู้ใช้</string>
+    <string name="home_score">คะแนนของคุณ:</string>
     <string name="profile_username">ชื่อผู้ใช้</string>
     <string name="profile_button">บันทึกการเปลี่ยนแปลง</string>
     <string name="profile_username_error">โปรดระบุชื่อผู้ใช้งาน</string>

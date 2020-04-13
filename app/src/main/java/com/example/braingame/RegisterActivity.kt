@@ -102,5 +102,8 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
         }
+        regisBackBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
 }

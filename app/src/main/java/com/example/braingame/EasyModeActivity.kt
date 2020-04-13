@@ -1,5 +1,6 @@
 package com.example.braingame
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -159,6 +160,7 @@ class EasyModeActivity : AppCompatActivity() {
             recreate()
         }
         alertDialog.setNegativeButton(resources.getString(R.string.game_terminate)) { _, _ ->
+            startActivity(Intent(this@EasyModeActivity, HomeActivity::class.java))
             finish()
         }
         alertDialog.show()
