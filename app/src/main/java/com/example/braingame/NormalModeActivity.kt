@@ -1,29 +1,33 @@
 package com.example.braingame
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_easy_mode.*
+import kotlinx.android.synthetic.main.activity_normal_mode.*
 
-class EasyModeActivity : AppCompatActivity() {
+class NormalModeActivity : AppCompatActivity() {
 
-    private val TAG: String = "Easy Mode"
+    private val TAG: String = "Normal Mode"
     private var mAuth = FirebaseAuth.getInstance()
     private var currentUser = mAuth.currentUser
     private var inGameScore: Int = 0
     private var numClick: Int = 0
     private var gamePlayed: Int = 1
-    private var scoreGiven: Int = 1
+    private var scoreGiven: Int = 2
     private var questionToPlay: Int = 5
     private val timeInit: Long = 3000
-    private val timeOut: Long = 5000
+    private val timeOut: Long = 7000
     private val interval: Long = 1000
+    private val timeAnimation: Long = 5000
     private lateinit var score: Score
     private lateinit var correctAnswer: String
     private lateinit var initialTimer : CountDownTimer
@@ -31,22 +35,21 @@ class EasyModeActivity : AppCompatActivity() {
     private val questionArray: ArrayList<ArrayList<String>> = ArrayList<ArrayList<String>>()
     private val questionData: Array<Array<String>> = arrayOf(
         //   "image_name", "correct answer"
-        arrayOf("easy_q1", "4"),
-        arrayOf("easy_q2", "3"),
-        arrayOf("easy_q3", "6"),
-        arrayOf("easy_q4", "5"),
-        arrayOf("easy_q5", "8"),
-        arrayOf("easy_q6", "8"),
-        arrayOf("easy_q7", "2"),
-        arrayOf("easy_q8", "5"),
-        arrayOf("easy_q9", "6"),
-        arrayOf("easy_q10", "7"),
-        arrayOf("easy_q11", "9")
+        arrayOf("normal_q1", "4"),
+        arrayOf("normal_q2", "9"),
+        arrayOf("normal_q3", "7"),
+        arrayOf("normal_q4", "6"),
+        arrayOf("normal_q5", "9"),
+        arrayOf("normal_q6", "8"),
+        arrayOf("normal_q7", "7"),
+        arrayOf("normal_q8", "10"),
+        arrayOf("normal_q9", "6"),
+        arrayOf("normal_q10", "8")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_easy_mode)
+        setContentView(R.layout.activity_normal_mode)
         val tempArr : ArrayList<Score>? = ScoreModel.getData()
         score = Score(null)
         if(tempArr != null){
@@ -66,17 +69,19 @@ class EasyModeActivity : AppCompatActivity() {
     private fun gameInitialize(){
         initialTimer = object: CountDownTimer(timeInit, interval){
             override fun onTick(millisUntilFinished: Long) {
-                gameEasyStartShowTime.text = ((millisUntilFinished/interval)+1).toString()
+                gameNormalStartShowTime.text = ((millisUntilFinished/interval)+1).toString()
             }
 
             override fun onFinish() {
-                gameEasyLayout.visibility = LinearLayout.VISIBLE
+                gameNormalLayout.visibility = LinearLayout.VISIBLE
                 for(question in questionData){
                     val tempArrayList: ArrayList<String> = ArrayList()
                     tempArrayList.add(question[0])
                     tempArrayList.add(question[1])
                     questionArray.add(tempArrayList)
                 }
+                gameNormalInitText.visibility = TextView.INVISIBLE
+                gameNormalStartShowTime.visibility = TextView.INVISIBLE
                 showQuestion()
             }
         }
@@ -87,24 +92,25 @@ class EasyModeActivity : AppCompatActivity() {
         val random: java.util.Random = java.util.Random()
         val randomNumber: Int = random.nextInt(questionArray.size)
         val thisQuestion: ArrayList<String> = questionArray[randomNumber]
-        gameEasyProgressBar.progress = ((gamePlayed.toDouble() / questionToPlay.toDouble()) * 100).toInt()
+        gameNormalProgressBar.progress = ((gamePlayed.toDouble() / questionToPlay.toDouble()) * 100).toInt()
         numClick = 0
-        gameEasyImageView.setImageResource(
+        gameNormalImageView.setImageResource(
             resources.getIdentifier(thisQuestion[0], "drawable", packageName)
         )
+        handleAnimation()
         correctAnswer = thisQuestion[1]
         questionArray.removeAt(randomNumber)
         gameTimer = object: CountDownTimer(timeOut, interval){
             override fun onTick(millisUntilFinished: Long) {
-                gameEasyShowTime.text = ((millisUntilFinished/interval)+1).toString()
-                gameEasyNumBlock.text = numClick.toString()
-                gameEasyButton.setOnClickListener {
+                gameNormalShowTime.text = ((millisUntilFinished/interval)+1).toString()
+                gameNormalNumBlock.text = numClick.toString()
+                gameNormalButton.setOnClickListener {
                     numClick++
-                    gameEasyNumBlock.text = numClick.toString()
+                    gameNormalNumBlock.text = numClick.toString()
                 }
             }
             override fun onFinish() {
-                gameEasyShowTime.text = "0"
+                gameNormalShowTime.text = "0"
                 checkAnswer()
             }
         }
@@ -155,7 +161,7 @@ class EasyModeActivity : AppCompatActivity() {
             recreate()
         }
         alertDialog.setNegativeButton(resources.getString(R.string.game_terminate)) { _, _ ->
-            startActivity(Intent(this@EasyModeActivity, HomeActivity::class.java))
+            startActivity(Intent(this@NormalModeActivity, HomeActivity::class.java))
             finish()
         }
         alertDialog.show()
@@ -170,7 +176,21 @@ class EasyModeActivity : AppCompatActivity() {
             }
         })
     }
-
+    private fun handleAnimation(){
+        val random: java.util.Random = java.util.Random()
+        when(random.nextInt(2)){
+            0 -> {
+                val objectAnimator: ObjectAnimator = ObjectAnimator.ofFloat(gameNormalImageView, View.ALPHA, 1.0f, 0.0f)
+                objectAnimator.duration = timeAnimation
+                objectAnimator.start()
+            }
+            1 -> {
+                val objectAnimator: ObjectAnimator = ObjectAnimator.ofFloat(gameNormalImageView, View.ALPHA, 0.0f, 1.0f)
+                objectAnimator.duration = timeAnimation
+                objectAnimator.start()
+            }
+        }
+    }
     override fun onBackPressed() {
     }
 }

@@ -35,6 +35,26 @@ class HomeFragment : Fragment() {
             alertDialog.setNegativeButton(resources.getString(R.string.home_dialog_no)){_, _ -> }
             alertDialog.show()
         }
+        homeNormal.setOnClickListener {
+            val alertDialog: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+            alertDialog.setTitle(resources.getString(R.string.home_dialog_title))
+            alertDialog.setMessage(resources.getString(R.string.home_dialog_message))
+            alertDialog.setPositiveButton(resources.getString(R.string.home_dialog_yes)){_, _ ->
+                startActivity(Intent(activity, NormalModeActivity::class.java))
+            }
+            alertDialog.setNegativeButton(resources.getString(R.string.home_dialog_no)){_, _ -> }
+            alertDialog.show()
+        }
+        homeHard.setOnClickListener {
+            val alertDialog: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+            alertDialog.setTitle(resources.getString(R.string.home_dialog_title))
+            alertDialog.setMessage(resources.getString(R.string.home_dialog_message))
+            alertDialog.setPositiveButton(resources.getString(R.string.home_dialog_yes)){_, _ ->
+                startActivity(Intent(activity, HardModeActivity::class.java))
+            }
+            alertDialog.setNegativeButton(resources.getString(R.string.home_dialog_no)){_, _ -> }
+            alertDialog.show()
+        }
     }
 
 }

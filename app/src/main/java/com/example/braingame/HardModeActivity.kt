@@ -1,28 +1,32 @@
 package com.example.braingame
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_easy_mode.*
+import kotlinx.android.synthetic.main.activity_hard_mode.*
 
-class EasyModeActivity : AppCompatActivity() {
+class HardModeActivity : AppCompatActivity() {
 
-    private val TAG: String = "Easy Mode"
+    private val TAG: String = "Hard Mode"
     private var mAuth = FirebaseAuth.getInstance()
     private var currentUser = mAuth.currentUser
     private var inGameScore: Int = 0
     private var numClick: Int = 0
     private var gamePlayed: Int = 1
-    private var scoreGiven: Int = 1
+    private var scoreGiven: Int = 3
     private var questionToPlay: Int = 5
     private val timeInit: Long = 3000
-    private val timeOut: Long = 5000
+    private val timeOut: Long = 7000
     private val interval: Long = 1000
     private lateinit var score: Score
     private lateinit var correctAnswer: String
@@ -31,22 +35,21 @@ class EasyModeActivity : AppCompatActivity() {
     private val questionArray: ArrayList<ArrayList<String>> = ArrayList<ArrayList<String>>()
     private val questionData: Array<Array<String>> = arrayOf(
         //   "image_name", "correct answer"
-        arrayOf("easy_q1", "4"),
-        arrayOf("easy_q2", "3"),
-        arrayOf("easy_q3", "6"),
-        arrayOf("easy_q4", "5"),
-        arrayOf("easy_q5", "8"),
-        arrayOf("easy_q6", "8"),
-        arrayOf("easy_q7", "2"),
-        arrayOf("easy_q8", "5"),
-        arrayOf("easy_q9", "6"),
-        arrayOf("easy_q10", "7"),
-        arrayOf("easy_q11", "9")
+        arrayOf("hard_q1", "6"),
+        arrayOf("hard_q2", "5"),
+        arrayOf("hard_q3", "7"),
+        arrayOf("hard_q4", "8"),
+        arrayOf("hard_q5", "4"),
+        arrayOf("hard_q6", "7"),
+        arrayOf("hard_q7", "5"),
+        arrayOf("hard_q8", "6"),
+        arrayOf("hard_q9", "4"),
+        arrayOf("hard_q10", "6")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_easy_mode)
+        setContentView(R.layout.activity_hard_mode)
         val tempArr : ArrayList<Score>? = ScoreModel.getData()
         score = Score(null)
         if(tempArr != null){
@@ -66,17 +69,19 @@ class EasyModeActivity : AppCompatActivity() {
     private fun gameInitialize(){
         initialTimer = object: CountDownTimer(timeInit, interval){
             override fun onTick(millisUntilFinished: Long) {
-                gameEasyStartShowTime.text = ((millisUntilFinished/interval)+1).toString()
+                gameHardStartShowTime.text = ((millisUntilFinished/interval)+1).toString()
             }
 
             override fun onFinish() {
-                gameEasyLayout.visibility = LinearLayout.VISIBLE
+                gameHardLayout.visibility = LinearLayout.VISIBLE
                 for(question in questionData){
                     val tempArrayList: ArrayList<String> = ArrayList()
                     tempArrayList.add(question[0])
                     tempArrayList.add(question[1])
                     questionArray.add(tempArrayList)
                 }
+                gameHardInitText.visibility = TextView.INVISIBLE
+                gameHardStartShowTime.visibility = TextView.INVISIBLE
                 showQuestion()
             }
         }
@@ -87,24 +92,25 @@ class EasyModeActivity : AppCompatActivity() {
         val random: java.util.Random = java.util.Random()
         val randomNumber: Int = random.nextInt(questionArray.size)
         val thisQuestion: ArrayList<String> = questionArray[randomNumber]
-        gameEasyProgressBar.progress = ((gamePlayed.toDouble() / questionToPlay.toDouble()) * 100).toInt()
+        gameHardProgressBar.progress = ((gamePlayed.toDouble() / questionToPlay.toDouble()) * 100).toInt()
         numClick = 0
-        gameEasyImageView.setImageResource(
+        gameHardImageView.setImageResource(
             resources.getIdentifier(thisQuestion[0], "drawable", packageName)
         )
+        handleAnimation()
         correctAnswer = thisQuestion[1]
         questionArray.removeAt(randomNumber)
         gameTimer = object: CountDownTimer(timeOut, interval){
             override fun onTick(millisUntilFinished: Long) {
-                gameEasyShowTime.text = ((millisUntilFinished/interval)+1).toString()
-                gameEasyNumBlock.text = numClick.toString()
-                gameEasyButton.setOnClickListener {
+                gameHardShowTime.text = ((millisUntilFinished/interval)+1).toString()
+                gameHardNumBlock.text = numClick.toString()
+                gameHardButton.setOnClickListener {
                     numClick++
-                    gameEasyNumBlock.text = numClick.toString()
+                    gameHardNumBlock.text = numClick.toString()
                 }
             }
             override fun onFinish() {
-                gameEasyShowTime.text = "0"
+                gameHardShowTime.text = "0"
                 checkAnswer()
             }
         }
@@ -155,7 +161,7 @@ class EasyModeActivity : AppCompatActivity() {
             recreate()
         }
         alertDialog.setNegativeButton(resources.getString(R.string.game_terminate)) { _, _ ->
-            startActivity(Intent(this@EasyModeActivity, HomeActivity::class.java))
+            startActivity(Intent(this@HardModeActivity, HomeActivity::class.java))
             finish()
         }
         alertDialog.show()
@@ -170,7 +176,14 @@ class EasyModeActivity : AppCompatActivity() {
             }
         })
     }
-
+    private fun handleAnimation(){
+        val animation: AlphaAnimation = AlphaAnimation(1f, 0f)
+        animation.duration = 200
+        animation.interpolator = LinearInterpolator()
+        animation.repeatCount = 30
+        animation.repeatMode = Animation.REVERSE
+        gameHardImageView.startAnimation(animation)
+    }
     override fun onBackPressed() {
     }
 }

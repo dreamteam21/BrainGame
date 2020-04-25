@@ -16,20 +16,33 @@
         android:screenOrientation="locked"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EasyModeActivity"
-            android:screenOrientation="locked"></activity>
-        <activity android:name=".OfflineActivity"
+        <activity
+            android:name=".HardModeActivity"
             android:screenOrientation="locked"/>
-        <activity android:name=".HomeActivity"
+        <activity
+            android:name=".NormalModeActivity"
             android:screenOrientation="locked"/>
-        <activity android:name=".RegisterActivity"
-            android:screenOrientation="locked"/>
-        <activity android:name=".LoginActivity"
-            android:screenOrientation="locked"/>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".EasyModeActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".OfflineActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".RegisterActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

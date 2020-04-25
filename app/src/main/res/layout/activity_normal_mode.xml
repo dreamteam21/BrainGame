@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".EasyModeActivity">
+    tools:context=".NormalModeActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,9 +17,10 @@
         android:text="@string/game_starting"
         android:textSize="30dp"
         android:textAlignment="center"
-        android:layout_marginBottom="120dp"/>
+        android:layout_marginBottom="120dp"
+        android:id="@+id/gameNormalInitText"/>
     <TextView
-        android:id="@+id/gameEasyStartShowTime"
+        android:id="@+id/gameNormalStartShowTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +33,7 @@
         android:layout_marginTop="0dp"/>
 
     <LinearLayout
-        android:id="@+id/gameEasyLayout"
+        android:id="@+id/gameNormalLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -40,7 +41,7 @@
         android:layout_marginTop="0dp">
 
         <ProgressBar
-            android:id="@+id/gameEasyProgressBar"
+            android:id="@+id/gameNormalProgressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,14 +57,14 @@
             android:layout_marginTop="30dp"
             android:text="@string/game_header_question"
             android:textSize="30dp"
-            android:id="@+id/gameEasyHeaderQuestion"/>
+            android:id="@+id/gameNormalHeaderQuestion"/>
 
         <ImageView
             android:layout_width="350dp"
             android:layout_height="500dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:id="@+id/gameEasyImageView"/>
+            android:id="@+id/gameNormalImageView"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +80,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/gameEasyBlockText"
+                    android:id="@+id/gameNormalBlockText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/game_block_text"
@@ -87,7 +88,7 @@
                     android:textSize="30dp"/>
 
                 <TextView
-                    android:id="@+id/gameEasyNumBlock"
+                    android:id="@+id/gameNormalNumBlock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -95,7 +96,7 @@
             </LinearLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/gameEasyButton"
+                android:id="@+id/gameNormalButton"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
@@ -108,7 +109,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/gameEasyTimeText"
+                    android:id="@+id/gameNormalTimeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/game_time_left"
@@ -116,7 +117,7 @@
                     android:textSize="30dp"/>
 
                 <TextView
-                    android:id="@+id/gameEasyShowTime"
+                    android:id="@+id/gameNormalShowTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
