@@ -10,26 +10,28 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="120dp"
+        android:fontFamily="@font/arvo"
         android:text="@string/game_starting"
-        android:textSize="30dp"
         android:textAlignment="center"
-        android:layout_marginBottom="120dp"/>
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/gameEasyStartShowTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/arvo"
         android:text="0"
-        android:textSize="100dp"
         android:textAlignment="center"
-        android:layout_marginTop="0dp"/>
+        android:textSize="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/gameEasyLayout"
@@ -50,13 +52,14 @@
             android:layout_marginTop="-6dp" />
 
         <TextView
+            android:id="@+id/gameEasyHeaderQuestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
+            android:fontFamily="@font/arvo"
             android:text="@string/game_header_question"
-            android:textSize="30dp"
-            android:id="@+id/gameEasyHeaderQuestion"/>
+            android:textSize="25dp" />
 
         <ImageView
             android:layout_width="350dp"
@@ -82,16 +85,18 @@
                     android:id="@+id/gameEasyBlockText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/game_block_text"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="30dp"/>
+                    android:fontFamily="@font/arvo"
+                    android:text="@string/game_block_text"
+                    android:textSize="30dp" />
 
                 <TextView
                     android:id="@+id/gameEasyNumBlock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="30dp"/>
+                    android:fontFamily="@font/arvo"
+                    android:textSize="30dp" />
             </LinearLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -111,16 +116,18 @@
                     android:id="@+id/gameEasyTimeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/game_time_left"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="30dp"/>
+                    android:fontFamily="@font/arvo"
+                    android:text="@string/game_time_left"
+                    android:textSize="30dp" />
 
                 <TextView
                     android:id="@+id/gameEasyShowTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="30dp"/>
+                    android:fontFamily="@font/arvo"
+                    android:textSize="30dp" />
             </LinearLayout>
 
         </LinearLayout>

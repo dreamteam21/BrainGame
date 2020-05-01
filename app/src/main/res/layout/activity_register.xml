@@ -4,7 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#E1F5FE"
     tools:context=".RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E0F7FA"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="236dp"
+            android:contentDescription="@string/logoImage"
+            android:paddingTop="20dp"
+            app:srcCompat="@drawable/logo3" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/regisName"
@@ -63,7 +79,11 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="25dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/arvo"
         android:text="@string/register_button"
+        android:textColor="#01579B"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/regisBackBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -73,7 +93,11 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/arvo"
         android:text="@string/register_back_button"
+        android:textColor="#01579B"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -83,10 +107,10 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

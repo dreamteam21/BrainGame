@@ -3,5 +3,7 @@
     <item
         android:id="@+id/navigationLogout"
         android:title="@string/home_logout"
-        android:icon="@drawable/logout"/>
+        android:icon="@drawable/logout"
+        android:font="@font/arvo" />
+
 </menu>

@@ -3,38 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E0F7FA"
     tools:context=".HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/home_level"
-        android:gravity="center_horizontal"
         android:layout_marginTop="100dp"
-        android:textSize="30dp"/>
+        android:fontFamily="@font/arvo"
+        android:gravity="center_horizontal"
+        android:text="@string/home_level"
+        android:textColor="#01579B"
+        android:textSize="35dp" />
 
     <Button
+        android:id="@+id/homeEasy"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="-70dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/arvo"
         android:text="@string/home_easy"
-        android:id="@+id/homeEasy"/>
+        android:textColor="#01579B"
+        android:textStyle="bold" />
 
     <Button
+        android:id="@+id/homeNormal"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/arvo"
         android:text="@string/home_normal"
-        android:id="@+id/homeNormal"/>
+        android:textColor="#01579B"
+        android:textStyle="bold" />
 
     <Button
+        android:id="@+id/homeHard"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="70dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/arvo"
         android:text="@string/home_hard"
-        android:id="@+id/homeHard"/>
+        android:textColor="#01579B"
+        android:textStyle="bold" />
 
 </FrameLayout>

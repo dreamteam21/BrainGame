@@ -20,21 +20,24 @@
             android:id="@+id/score_card_name"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/arvo"
+            android:maxLines="1"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/score_card_score"
-            app:layout_constraintTop_toTopOf="parent"
-            android:maxLines="1"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/score_card_score"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:fontFamily="@font/arvo"
             android:gravity="end"
-            app:layout_constraintStart_toEndOf="@id/score_card_name"
+            android:maxLines="1"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:maxLines="1"/>
+            app:layout_constraintStart_toEndOf="@id/score_card_name"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

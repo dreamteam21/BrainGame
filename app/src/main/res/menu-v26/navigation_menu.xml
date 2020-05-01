@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigationHome"
+        android:title="@string/home_home"
+        android:icon="@drawable/home"
+        android:font="@font/arvo"
+        />
+    <item
+        android:id="@+id/navigationProfile"
+        android:title="@string/home_profile"
+        android:icon="@drawable/profile"
+        android:font="@font/arvo"
+        />
+    <item
+        android:id="@+id/navigationLeaderboard"
+        android:title="@string/home_leaderboard"
+        android:icon="@drawable/leaderboard"
+        android:font="@font/arvo"
+        />
+    <item
+        android:id="@+id/navigationHowto"
+        android:title="@string/home_howto"
+        android:icon="@drawable/howto"
+        android:font="@font/arvo"
+        />
+
+</menu>

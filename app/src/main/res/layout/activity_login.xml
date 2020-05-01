@@ -4,7 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E0F7FA"
     tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/logoImage"
+        android:paddingTop="65dp"
+        app:srcCompat="@drawable/logo3"
+        tools:ignore="MissingConstraints" />
+
 
     <EditText
         android:id="@+id/loginEmail"
@@ -12,9 +23,11 @@
         android:layout_height="50dp"
         android:layout_marginBottom="25dp"
         android:ems="10"
+        android:focusable="true"
         android:hint="@string/login_email"
         android:inputType="none|textEmailAddress"
         android:textAlignment="center"
+
         app:layout_constraintBottom_toTopOf="@+id/loginPassword"
         app:layout_constraintStart_toStartOf="@+id/loginPassword" />
 
@@ -35,7 +48,11 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="25dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/arvo"
         android:text="@string/login"
+        android:textColor="#01579B"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/loginBackBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,7 +62,11 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="50dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/arvo"
         android:text="@string/login_back"
+        android:textColor="#01579B"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -55,10 +76,12 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
