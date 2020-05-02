@@ -51,12 +51,12 @@
             android:textSize="18sp" />
 
         <ImageView
-            android:id="@+id/imageView13"
+            android:id="@+id/imageView4"
             android:layout_width="match_parent"
             android:layout_height="600dp"
             android:layout_marginTop="40dp"
             android:contentDescription="@string/howto"
-            android:src="@drawable/howto4" />
+            android:src="@drawable/howto3" />
 
         <TextView
             android:id="@+id/textView6"

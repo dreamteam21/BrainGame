@@ -55,8 +55,8 @@
                 android:id="@+id/leaderboard_score_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ffffff"
-                android:backgroundTint="#FFFFFF" />
+                android:background="#E0F7FA"
+                android:backgroundTint="#E0F7FA" />
         </LinearLayout>
 
 
